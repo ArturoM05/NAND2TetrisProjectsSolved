@@ -1,0 +1,16 @@
+/**
+ * And gate:
+ * if (a and b) out = 1, else out = 0 
+ */
+CHIP And {
+    IN a, b;
+    OUT out;
+    
+    PARTS:
+    // short explanation, applying basic logic,  the negation of a negation it's the original value
+    // so if we have an NOT AND and we apply NOT to that we get NOT NOT AND that it's a simple AND
+    // entering the values of a NAND in the NOT constructed by NAND that we already did, we can implement 
+    // an AND based on NAND
+    Nand(a= a , b= b , out= A);
+    Nand(a=A , b=A , out= out );    
+}   
