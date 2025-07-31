@@ -1,0 +1,18 @@
+/**
+ * Or gate:
+ * if (a or b) out = 1, else out = 0 
+ */
+CHIP Or {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // short explanation, when we have an AND we can just apply morgan's law to pass it as an Or
+    // in this case we started with an NOT(NOT(a)*NOT(b)) and applying morgan's law we get a+b
+    // this happended beacause when we applied morgan's law we deny each input so we pass to NOT(NOT(a))+NOT(NOT(B))
+    // finally deleting double negation we get a+b.
+    
+    Nand(a=a,b=a, out=nota);
+    Nand(a=b,b=b, out=notb);
+    Nand(a=nota , b= notb, out= out );
+}
